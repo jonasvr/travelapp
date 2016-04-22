@@ -5,6 +5,7 @@ function writeFile() {
   window.requestFileSystem(type, size, successCallback, errorCallback)
 
   function successCallback(fs) {
+      console.log('succes');
 
       var previous = null;
 
