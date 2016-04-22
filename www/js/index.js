@@ -37,21 +37,21 @@ var app = {
 
         console.log(cordova.file);
         $("#track").click(function(){
-            console.log('track');
+            // console.log('track');
             tracker();
         });
 
         $("#read").click(function(){
-            console.log('read');
+            // console.log('read');
             readFile();
             // tracker();
         });
         $("#write").click(function(){
-            console.log('write');
+            // console.log('write');
             writeFile();
         });
         $("#remove").click(function(){
-            console.log('remove');
+            // console.log('remove');
             createFile();
         });
 

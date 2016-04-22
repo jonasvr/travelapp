@@ -7,7 +7,7 @@ function writeFile() {
   function successCallback(fs) {
       console.log('succes');
 
-      var previous = null;
+      var previous = '';
 
       fs.root.getFile('log.txt', {}, function(fileEntry) {
 
@@ -16,6 +16,7 @@ function writeFile() {
 
             reader.onloadend = function(e) {
               previous = this.result;
+              console.log(previous);
             };
 
             reader.readAsText(file);
