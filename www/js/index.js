@@ -54,10 +54,6 @@ var app = {
             console.log('remove');
             createFile();
         });
-        $("#create").click(function(){
-            console.log('create');
-            createFile();
-        });
 
 
     },
