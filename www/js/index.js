@@ -56,20 +56,35 @@ var app = {
 };
 
 function createFile() {
-    console.log('in');
-   var type = window.TEMPORARY;
-   var size = 5*1024*1024;
+    var type = window.TEMPORARY;
+  var size = 5*1024*1024;
 
-   window.requestFileSystem(type, size, successCallback, errorCallback)
+  window.requestFileSystem(type, size, successCallback, errorCallback)
 
-   function successCallback(fs) {
-      fs.root.getFile('log.txt', {create: true, exclusive: true}, function(fileEntry) {
-         alert('File creation successfull!')
-      }, errorCallback);
-   }
+  function successCallback(fs) {
 
-   function errorCallback(error) {
-      alert("ERROR: " + error.code)
-   }
+     fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+
+        fileEntry.createWriter(function(fileWriter) {
+           fileWriter.onwriteend = function(e) {
+              alert('Write completed.');
+           };
+
+           fileWriter.onerror = function(e) {
+              alert('Write failed: ' + e.toString());
+           };
+
+           var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+           fileWriter.write(blob);
+        }, errorCallback);
+
+     }, errorCallback);
+
+  }
+
+  function errorCallback(error) {
+     alert("ERROR: " + error.code)
+  }
+   
 
 }
