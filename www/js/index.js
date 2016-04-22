@@ -37,7 +37,17 @@ var app = {
 
         console.log(cordova.file);
         $("#track").click(function(){
-            console.log('start');
+            console.log('track');
+            tracker();
+        });
+
+        $("#read").click(function(){
+            console.log('read');
+            readFile();
+            // tracker();
+        });
+        $("#write").click(function(){
+            console.log('write');
             createFile();
             // tracker();
         });
@@ -85,6 +95,35 @@ function createFile() {
   function errorCallback(error) {
      alert("ERROR: " + error.code)
   }
-   
+}
+
+function readFile() {
+   var type = window.TEMPORARY;
+   var size = 5*1024*1024;
+
+   window.requestFileSystem(type, size, successCallback, errorCallback)
+
+   function successCallback(fs) {
+
+      fs.root.getFile('log.txt', {}, function(fileEntry) {
+
+         fileEntry.file(function(file) {
+            var reader = new FileReader();
+
+            reader.onloadend = function(e) {
+               var txtArea = document.getElementById('textarea');
+               txtArea.value = this.result;
+            };
+
+            reader.readAsText(file);
+
+         }, errorCallback);
+
+      }, errorCallback);
+   }
+
+   function errorCallback(error) {
+      alert("ERROR: " + error.code)
+   }
 
 }
