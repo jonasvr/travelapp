@@ -24,6 +24,11 @@ var app = {
             tracker();
         });
 
+        $("#stop").click(function(){
+            // console.log('track');
+            stopTracker();
+        });
+
         $("#read").click(function(){
             // console.log('read');
             readFile();

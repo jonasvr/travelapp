@@ -1,3 +1,5 @@
+var watchID=null;
+
 // functie word niet gebruikt => was om te testen hoe snel er werd gegaan en hoe nauwkeurig de locatie werd bepaald
 function tracker(){
     console.log('in');
@@ -34,5 +36,10 @@ function tracker(){
 
    // Options: throw an error if no update is received every 30 seconds.
    //
-   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000,enableHighAccuracy: true, maximumAge: 10*1000 });
+   watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000,enableHighAccuracy: true, maximumAge: 10*1000 });
+}
+
+
+function stopTracker(){
+    navigator.geolocation.clearWatch(watchID);
 }
